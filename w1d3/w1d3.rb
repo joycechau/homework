@@ -65,10 +65,3 @@ puts gamma_fnc(0)  # => returns nil
 puts gamma_fnc(1)  # => returns 1
 puts gamma_fnc(4)  # => returns 6
 puts gamma_fnc(8)  # => returns 5040
-
-def func(arg1, arg2)
-  temp = arg1 * arg2
-  return_val = (temp ** 2) + (arg1 % 6 + 1) / (7 + arg2 + arg1)
-end
-
-puts func(5, 10)

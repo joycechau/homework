@@ -1,4 +1,4 @@
-require 'simon'
+require 'simonv2'
 
 describe Simon do
   subject(:simon) { Simon.new }

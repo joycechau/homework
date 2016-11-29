@@ -2,7 +2,6 @@ class LRUCache
    def initialize(size)
      @size = size
      @cache = []
-
    end
 
    def count

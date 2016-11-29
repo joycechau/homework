@@ -1,5 +1,5 @@
 require 'rspec'
-require 'board'
+require 'boardv2'
 require 'spec_helper'
 
 describe Board do

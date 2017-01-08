@@ -62,8 +62,6 @@
 	
 	var _root2 = _interopRequireDefault(_root);
 	
-	var _api_util = __webpack_require__(185);
-	
 	var _giphy_actions = __webpack_require__(184);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -71,7 +69,7 @@
 	document.addEventListener('DOMContentLoaded', function () {
 	  var store = (0, _store2.default)();
 	  window.store = store;
-	  window.fetchSearchGiphys = _api_util.fetchSearchGiphys;
+	  window.fetchSearchGiphys = _giphy_actions.fetchSearchGiphys;
 	  window.receiveSearchGiphys = _giphy_actions.receiveSearchGiphys;
 	  // ReactDOM.render(<Root />, document.getElementById('root'));
 	});
@@ -19793,7 +19791,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var configureStore = function configureStore() {
-	  return (0, _redux.createStore)(_root_reducer2.default);
+	  return (0, _redux.createStore)(_root_reducer2.default, (0, _redux.applyMiddleware)(_reduxThunk2.default));
 	};
 	
 	exports.default = configureStore;
@@ -20916,7 +20914,7 @@
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.receiveSearchGiphys = exports.RECEIVE_SEARCH_GIPHYS = undefined;
+	exports.fetchSearchGiphys = exports.receiveSearchGiphys = exports.REQUEST_SEARCH_GIPHYS = exports.RECEIVE_SEARCH_GIPHYS = undefined;
 	
 	var _api_util = __webpack_require__(185);
 	
@@ -20925,11 +20923,20 @@
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 	
 	var RECEIVE_SEARCH_GIPHYS = exports.RECEIVE_SEARCH_GIPHYS = 'RECEIVE_SEARCH_GIPHYS';
+	var REQUEST_SEARCH_GIPHYS = exports.REQUEST_SEARCH_GIPHYS = 'REQUEST_SEARCH_GIPHYS';
 	
 	var receiveSearchGiphys = exports.receiveSearchGiphys = function receiveSearchGiphys(giphys) {
 	  return {
 	    type: RECEIVE_SEARCH_GIPHYS,
 	    giphys: giphys
+	  };
+	};
+	
+	var fetchSearchGiphys = exports.fetchSearchGiphys = function fetchSearchGiphys(searchTerm) {
+	  return function (dispatch) {
+	    APIUtil.fetchSearchGiphys(searchTerm).then(function (giphys) {
+	      return dispatch(receiveSearchGiphys(giphys));
+	    });
 	  };
 	};
 
